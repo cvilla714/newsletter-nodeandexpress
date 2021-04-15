@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "Newsletter",
   "main": "app.js",
-   "scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Cosmel Villalobos",
   "license": "ISC",
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.40",
     "express": "^4.17.1"
   }
 }
