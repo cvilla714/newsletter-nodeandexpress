@@ -2,6 +2,10 @@ const client = require('@mailchimp/mailchimp_marketing');
 const express = require('express');
 const app = express();
 const port = 3000;
+const API_Key = process.env.APIKEY;
+const Server_Number = process.env.SERVER;
+const List = process.env.LIST;
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
@@ -10,8 +14,8 @@ app.get('/', (req, res) => {
 });
 
 client.setConfig({
-  apiKey: '4d17e37348b4f9c7d4a3ef45dde1c444-us17',
-  server: 'us17',
+  apiKey: API_Key,
+  server: Server_Number,
 });
 
 app.post('/', (req, res) => {
@@ -29,7 +33,7 @@ app.post('/', (req, res) => {
 
   const run = async () => {
     try {
-      const response = await client.lists.addListMember('63c685e33d', {
+      const response = await client.lists.addListMember(List, {
         email_address: subscribingUser.email,
         status: 'subscribed',
         merge_fields: {
@@ -51,12 +55,6 @@ app.post('/failure', (req, res) => {
   res.redirect('/');
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Server is running of port ${port}`);
 });
-
-// API from mailchimp
-// 4d17e37348b4f9c7d4a3ef45dde1c444-us17
-
-// list ID
-// 63c685e33d
