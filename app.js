@@ -19,10 +19,6 @@ client.setConfig({
 });
 
 app.post('/', (req, res) => {
-  // console.log(req.body.firstname);
-  // console.log(req.body.lastname);
-  // console.log(req.body.email);
-
   const firstName = req.body.firstname;
   const lastName = req.body.lastname;
   const email = req.body.email;
