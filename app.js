@@ -1,13 +1,19 @@
+const client = require('@mailchimp/mailchimp_marketing');
 const express = require('express');
 const app = express();
 const port = 3000;
 app.use(express.urlencoded({ extended: true }));
-const client = require('@mailchimp/mailchimp_marketing');
+
 // const https = require('https');
 
 app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/signup.html');
+});
+
+client.setConfig({
+  apiKey: '4d17e37348b4f9c7d4a3ef45dde1c444-us17',
+  server: 'us17',
 });
 
 app.post('/', (req, res) => {
@@ -22,11 +28,6 @@ app.post('/', (req, res) => {
   console.log(firstName, lastName, email);
 
   const subscribingUser = { firstName: firstName, lastName: lastName, email: email };
-
-  client.setConfig({
-    apiKey: 'd4a44d62b9eb79790933a44b3780df4e-us17',
-    server: 'us17',
-  });
 
   const run = async () => {
     const response = await client.lists.addListMember('63c685e33d', {
@@ -47,7 +48,7 @@ app.listen(port, () => {
 });
 
 // API from mailchimp
-// d4a44d62b9eb79790933a44b3780df4e-us17
+// 4d17e37348b4f9c7d4a3ef45dde1c444-us17
 
 // list ID
 // 63c685e33d
